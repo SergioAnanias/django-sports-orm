@@ -1,32 +1,257 @@
 <!DOCTYPE html>
+
+
 <html>
+
 	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Sports Leagues</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+			integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
 	</head>
+
 	<body>
-		<h1>Leagues</h1>
-		<ol>
-			{% for league in leagues %}
-				<li>{{league.name}}</li>
-			{% empty %}
-				<p>No leagues found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
-			{% endfor %}
-		</ol>
-		<h1>Teams</h1>
-		<ol>
-			{% for team in teams %}
-				<li>{{team.location}} {{team.team_name}}</li>
-			{% empty %}
-				<p>No teams found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
-			{% endfor %}
-		</ol>
-		<h1>Players</h1>
-		<ol>
-			{% for player in players %}
-				<li>{{player.first_name}} {{player.last_name}}</li>
-			{% empty %}
-				<p>No teams found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
-			{% endfor %}
-		</ol>
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="orm1-tab" data-toggle="tab" href="#orm1" role="tab"
+						aria-controls="orm1" aria-selected="true">Sports ORM 1</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="orm2-tab" data-toggle="tab" href="#orm2" role="tab" aria-controls="orm2"
+						aria-selected="false">Sports ORM 2</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="orm1" role="tabpanel" aria-labelledby="orm1-tab">
+					<h1>1.- Todas las ligas de béisbol</h1>
+					<ol>
+						{% for league in leagues %}
+						{% if league.sport == 'Baseball'%}
+						<li> {{league.name}} </li>
+						{% endif %}
+						{% endfor %}
+					</ol>
+					<h1>2.- Todas las ligas femeninas</h1>
+					<ol>
+						{% for womenleague in womenleagues %}
+						<li> {{womenleague.name}}</li>
+						{% endfor %}
+					</ol>
+					<h1>3.- Todas las ligas donde el deporte es cualquier tipo de hockey</h1>
+					<ol>
+						{% for hockeyleague in hockeyleagues %}
+						<li>{{ hockeyleague.name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>4.- Todas las ligas donde el deporte no sea football</h1>
+					<ol>
+						{% for league in allbutfootball %}
+						<li> {{league.name}}</li>
+						{% endfor %}
+					</ol>
+					<h1>5.- Todas las ligas que se llaman "conferencias"</h1>
+					<ol>
+						{% for conference in conferenceleagues %}
+						<li>{{conference.name}}</li>
+						{% endfor %}
+					</ol>
+					<h1>6.- Todas las ligas de la región atlántica</h1>
+					<ol>
+						{% for atlantic in atlanticleagues %}
+						<li>{{ atlantic.name }}</li>
+						{% endfor %}
+					</ol>
+
+					<h1>7.- Todos los equipos con sede en Dallas</h1>
+					<ol>
+						{% for team in dallasteams %}
+						<li>{{ team.team_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>8.- Todos los equipos nombrados los Raptors</h1>
+					<ol>
+						{% for team in raptorteams %}
+						<li> {{ team.team_name }} de {{ team.location}} </li>
+						{% endfor %}
+					</ol>
+					<h1>9.- Todos los equipos cuya ubicación incluye "Ciudad"</h1>
+					<ol>
+						{% for team in cityteams %}
+						<li> {{ team.team_name }} de {{ team.location }} </li>
+						{% endfor %}
+					</ol>
+					<h1>10.- Todos los equipos cuyos nombres comienzan con "T"</h1>
+					<ol>
+						{% for team in teamstartwitht %}
+						<li> {{team.team_name}} </li>
+						{% endfor %}
+					</ol>
+					<h1>11.- Todos los equipos, ordenados alfabeticamente por ubicación </h1>
+					<ol>
+						{% for team in abcteams %}
+						<li> {{ team.team_name }} de {{ team.location }} </li>
+						{% endfor %}
+					</ol>
+					<h1>12.- Todos los equipos, ordenados por nombre de equipo en orden alfabetico inverso</h1>
+					<ol>
+						{% for team in reverseteams %}
+						<li> {{ team.team_name }} de {{ team.location }} </li>
+						{% endfor %}
+					</ol>
+
+					<h1>13.- Cada jugador con apellido "Cooper"</h1>
+					<ol>
+						{% for player in cooperplayers %}
+						<li>{{ player.first_name }} {{ player.last_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>14.- Cada jugador con nombre "Joshua"</h1>
+					<ol>
+						{% for player in joshuaplayers %}
+						<li>{{ player.first_name }} {{ player.last_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>15.- Todos los jugadores con el apellido "Cooper" Excepto aquellos con "Joshua" como primer
+						nombre</h1>
+					<ol>
+						{% for player in cooperbutjoshua %}
+						<li>{{ player.first_name }} {{ player.last_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>16.- Todos los jugadores con nombre "Alexander" o "Wyatt"</h1>
+					<ol>
+						{% for player in alexowyatt %}
+						<li>{{ player.first_name }} {{ player.last_name }}</li>
+						{% endfor %}
+					</ol>
+				</div>
+				<div class="tab-pane fade" id="orm2" role="tabpanel" aria-labelledby="orm2-tab">
+					<h1>1.-Todos los equipos en la Atlantic Soccer Conference</h1>
+					<ol>
+						{% for team in atlanticteams %}
+						<li> {{ team.location }} {{ team.team_name }} </li>
+						{% endfor %}
+					</ol>
+					<h1>2.- Todos los jugadores (actuales) en los Boston Penguins</h1>
+					<ol>
+						{% for player in penguinsplayers %}
+						<li> {{ player.first_name }} {{ player.last_name }} </li>
+						{% endfor %}
+					</ol>
+					<h1>3.- Todos los jugadores (actuales) en la International Collegiate Baseball Conference</h1>
+					<ol>
+						{% for player in internationalbaseplayers %}
+						<li> {{ player.first_name }} {{ player.last_name }} </li>
+						{% endfor %}
+					</ol>
+					<h1>4.- Todos los jugadores (actuales) en la Conferencia Americana de Fútbol Amateur con el
+						apellido
+						"López"
+					</h1>
+					<ol>
+						{% for player in lopezplayers %}
+						<li> {{ player.first_name }} {{ player.last_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>5.- Todos los jugadores de fútbol</h1>
+					<ol>
+						{% for player in footballplayers %}
+						<li>{{ player.first_name }} {{ player.last_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>6.- Todos los equipos con un jugador (actual) llamado "Sophia"</h1>
+					<ol>
+						{% for team in sophiateams %}
+						<li>{{ team.team_name }} de {{ team.location }} </li>
+						{% endfor %}
+					</ol>
+					<h1>7.- Todas las ligas con un jugador (actual) llamado "Sophia"</h1>
+					<ol>
+						{% for league in sophialeagues %}
+						<li> {{ league.name }} </li>
+						{% endfor %}
+					</ol>
+					<h1>8.- Todos con el apellido "Flores" que NO (actualmente) juegan para los Washington
+						Roughriders
+					</h1>
+					<ol>
+						{% for flores in floresnotinwr %}
+						<li>{{ flores.first_name }} {{ flores.last_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>9.- Todos los equipos, pasados y presentes, con los que Samuel Evans ha jugado</h1>
+					<ol>
+						{% for samuel in samuelevansteams %}
+						<li>{{ samuel.location }} {{ samuel.team_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>10.- Todos los jugadores, pasados y presentes, con los gatos tigre de Manitoba</h1>
+					<ol>
+						{% for player in manitobatigerplayers %}
+						<li>{{ player.first_name }} {{ player.last_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>11.- Todos los jugadores que anteriormente estaban (pero que no lo están) con los Wichita
+						Vikings</h1>
+					<ol>
+						{% for player in notinvikingsrn %}
+						<li>{{ player.first_name }} {{ player.last_name }}</li>
+						{% endfor %}
+					</ol>
+					<h1>12.- Cada equipo para el que Jacob Gray jugó antes de unirse a los Oregon Colts</h1>
+					<ol>
+						{% for team in jacobgraybefore %}
+						<li> {{ team.location }} {{ team.team_name }} </li>
+						{% endfor %}
+					</ol>
+					<h1>13.- Todos los jugadores llamados "Joshua" que alguna vez han jugado en la Federación
+						Atlántica
+						de
+						Jugadores
+						de Béisbol Amateur
+					</h1>
+					<ol>
+						{% for joshua in joshuafed %}
+						<li> {{ joshua.first_name }} {{ joshua.last_name }} </li>
+						{% endfor %}
+					</ol>
+					<h1>14.- Todos los equipos que han tenido 12 o más jugadores, pasados y presentes. (SUGERENCIA:
+						busque la
+						función de
+						anotación de Django).</h1>
+					<ol>
+						{% for team in morethan12 %}
+						{% if team.all_players__count >= 12 %}
+						<li> {{ team.team_name }} ha tenido {{ team.all_players__count }} jugadores </li>
+						{% endif %}
+						{% endfor %}
+					</ol>
+					<h1>15.- Todos los jugadores y el número de equipos para los que jugó, ordenados por la cantidad
+						de
+						equipos
+						para
+						los
+						que han jugado</h1>
+					<ol>
+						{% for player in allplayers %}
+						<li> {{ player.first_name }} {{ player.last_name }} jugó para {{ player.all_teams__count}}
+							equipo(s)
+						</li>
+						{% endfor %}
+					</ol>
+				</div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"></script>
 	</body>
+
 </html>

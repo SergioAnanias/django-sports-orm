@@ -3,8 +3,13 @@
 Question | Expected Output
 --- | ---
 1. Find all baseball leagues | International Collegiate Baseball Conference, Atlantic Federation of Amateur Baseball Players
-2. Find all womens' leagues | International Association of Womens' Basketball Players, Transamerican Womens' Football Athletics Conference
-3. Find all leagues where sport is any type of hockey | International Conference of Amateur Ice Hockey, Atlantic Amateur Field Hockey League, Pacific Ice Hockey Conference
+2. Find all womens' leagues | 
+International Association of Womens' Basketball Players, 
+Transamerican Womens' Football Athletics Conference
+3. Find all leagues where sport is any type of hockey | 
+International Conference of Amateur Ice Hockey, 
+Atlantic Amateur Field Hockey League, 
+Pacific Ice Hockey Conference
 4. Find all leagues where sport is something OTHER THAN football | International Conference of Amateur Ice Hockey, International Collegiate Baseball Conference, Atlantic Federation of Amateur Baseball Players, Atlantic Federation of Basketball Athletics, Atlantic Soccer Conference, International Association of Womens' Basketball Players, Atlantic Amateur Field Hockey League, Pacific Ice Hockey Conference
 5. Find all leagues that call themselves "conferences" | International Conference of Amateur Ice Hockey, International Collegiate Baseball Conference, Atlantic Soccer Conference, American Conference of Amateur Football, Transamerican Womens' Football Athletics Conference, Pacific Ice Hockey Conference
 6. Find all leagues in the Atlantic region | Atlantic Federation of Amateur Baseball Players, Atlantic Federation of Basketball Athletics, Atlantic Soccer Conference, Atlantic Amateur Field Hockey League
